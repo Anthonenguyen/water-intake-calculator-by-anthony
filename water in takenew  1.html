@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Water Intake Calculator</title>
+    <script>
+        function calculateWaterIntake() {
+            var weight = parseFloat(document.getElementById("weight").value);
+            var currentIntake = parseFloat(document.getElementById("currentIntake").value);
+            var gender = document.getElementById("gender").value;
+            var weeklyIncrease = 0.3; // liters/week
+
+            // Calculate target intake based on gender
+            var targetIntake = gender === "male" ? 3.7 : 2.7;
+
+            // Calculate weeks to reach the final goal
+            var weeksToFinalGoal = (targetIntake - currentIntake) / weeklyIncrease;
+
+            // Ensure weeks are non-negative
+            weeksToFinalGoal = weeksToFinalGoal < 0 ? 0 : weeksToFinalGoal;
+
+            // Display results
+            document.getElementById("weeksToFinalGoal").innerText = weeksToFinalGoal.toFixed(2) + " weeks";
+        }
+    </script>
+</head>
+<body>
+    <h1>Water Intake Calculator</h1>
+    <p><strong>Essential Water Intake Goal per Day:</strong></p>
+    <p>Men: 3.7 liters</p>
+    <p>Women: 2.7 liters</p>
+    
+    <form>
+        <label for="weight">Body Weight (kg):</label>
+        <input type="number" id="weight" name="weight"><br><br>
+        
+        <label for="currentIntake">Current Water Consumption (liters/day):</label>
+        <input type="number" step="0.01" id="currentIntake" name="currentIntake"><br><br>
+        
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br><br>
+        
+        <input type="button" value="Calculate" onclick="calculateWaterIntake()">
+    </form>
+    
+    <h2>Results</h2>
+    <p>Weeks to Reach Final Goal: <span id="weeksToFinalGoal"></span></p>
+</body>
+</html>
